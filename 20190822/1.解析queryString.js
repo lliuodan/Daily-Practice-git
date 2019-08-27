@@ -49,7 +49,7 @@ function parseQueryLeader(url) {
     if (index === -1 || index === url.length - 1) {
         return ret
     }
-    const search = url.substring(index+1);
+    const search = url.substring(index + 1);
     search.split('&').forEach(s => {
         const arr = s.split('=');
         ret[arr[0]] = arr[1] || '';
