@@ -97,3 +97,78 @@ var reg=/to/ig;
 var str1=str.match(reg);
 console.log(str1); //["To", "to"]
 console.log(str.match("Hello")); //null
+
+/*ES6新增字符串方法*/
+// 注：如果只是需要判断某字符串中是否包含子字符串，那么推荐使用ES6 新增的方法；如果需要找到在字符串中的位置，那么就使用 indexOf() 方法。
+// 1.字符串的子串识别
+// includes(str, index): 返回布尔值，表示是否找到了参数字符串
+var a = 'abcdef';
+console.log(a.includes('cd'));  //true
+console.log(a.includes('ab', 1));   //false  (从第1个位置开始找)
+console.log(a.includes('ab', 0));   //true
+
+// starsWith(str, index): 返回布尔值，表示参数字符串是否在原字符串的头部
+var a = 'abcadef';
+console.log(a.startsWith('ab'));    //true
+console.log(a.startsWith('ab', 2)); //false
+console.log(a.startsWith('ab', 0)); //true
+
+// endsWith(str, index): 返回布尔值，表示参数字符串是否在原字符串的尾部（第二个参数代表前几个字符数）
+var  a = 'abcdef';
+console.log(a.endsWith('ef'));    //true
+console.log(a.endsWith('bc', 3)); //true (前3个字符, bc是否在尾部)
+console.log(a.endsWith('cd',4)); //true (前4个字符, )
+
+// 2. repeat() 接收一个Number类型的数据,将原来的字符串重复n次得到一个新的字符串,原来的不变
+console.log('ab'.repeat(3)); //ababab
+console.log('abc'.repeat(2.8)); //'abcabc'   小数向下取整
+console.log('abc'.repeat(-1)); //负数/infinity 报错的    Invalid count value
+console.log('abc'.repeat('2'));//"abcabc"    将字符串作为数字
+console.log('abc'.repeat()); //""（空字符串）
+console.log('abc'.repeat(0)); //""（空字符串）
+console.log('abc'.repeat(-0.3));//"" (空字符串)   0---->-1之间   结果为0
+console.log('abc'.repeat(NaN));//"" (空字符串)   0---->-1之间   结果为0
+
+// 3. padStart(), padEnd()
+// 如果某个字符串不够指定长度，会在头部或尾部补全。padStart() 用于头部补全，padEnd() 用于尾部补全。
+// 它们一共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串。
+console.log('a'.padStart(5,'XX')); //XXXXa
+console.log('a'.padEnd(5,'XX')); //aXXXX
+console.log('aaaa'.padStart(5,'XX')); //Xaaaa     如果用来补全的字符与原字符串，两者的长度之和超过了最大长度，则会截去超出位数的补全字符串
+console.log('a'.padStart(5)); //'    a'   省略第二个参数，默认使用空格补全长度
+console.log('aaaaa6'.padStart(5,'XX'));// 'aaaaa6'如果原字符的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串。
+
+// 4.字符串模板
+// 字符串模板最简单的语法，是使用反引号（``）来包裹普通字符串,${}实现一个变量
+
+var  a = 'hello';
+console.log(a+', zhangsan');    //以前，我们这样做
+console.log(`${a}, zhangsan`);  //现在，我们这样做
+
+//ES6 保留换行和空格
+let s1=`hahahha
+    hertvmrgiur
+nfrihr
+   `;
+
+//\`转义
+console.log(`ssss\`3456`);//ssss`3456
+
+//{可以运算}
+let x=1;
+let y=2;
+console.log(`${x}+${y}=${x+y}`);//1+2=3
+
+//调用函数（带参）
+function fn(x){
+    return x;
+}
+let s2='hhhh';
+console.log(`函数fn输出的结果是${fn(s2)}`);//"函数fn输出的结果是hhhh"
+
+let s3='return'+'`hello ${wd}`';
+let fun=new Function("wd",s3);
+console.log(fun('world'));//hello world
+
+
+
